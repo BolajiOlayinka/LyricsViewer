@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Header from "./components/Layouts/Header";
+import Home from "./components/Layouts/Home";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Provider } from "./context";
+import Lyrics from './components/Tracks/Lyrics';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Provider>
+        <Router>
+          <React.Fragment>
+            <Header />
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/lyrics/track/:id" component={Lyrics} />
+              </Switch>
+            </div>
+          </React.Fragment>
+        </Router>
+      </Provider>
+    );
+  }
 }
 
 export default App;
